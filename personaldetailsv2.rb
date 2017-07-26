@@ -1,4 +1,5 @@
 require 'sinatra'
+require_relative 'sum.rb'
 
 get '/' do
 	
@@ -46,7 +47,7 @@ post '/eye_color' do
 	name = params[:user_name]
 	hair_color = params[:hair_color]
 	eye_color = params[:eye_color]
-	redirect 'food?user_name=' + name + '&age=' + age + '&hair_color=' + hair_color + '&eye_color' + eye_color
+	redirect 'food?user_name=' + name + '&age=' + age + '&hair_color=' + hair_color + '&eye_color=' + eye_color
 end
 
 get '/food' do
@@ -63,7 +64,7 @@ post '/food' do
 	hair_color = params[:hair_color]
 	eye_color = params[:eye_color]
 	food = params[:food]
-	redirect 'drink?user_name=' + name + '&age=' + age + '&hair_color=' + hair_color + '&eye_color' + eye_color + '&food=' + food
+	redirect 'drink?user_name=' + name + '&age=' + age + '&hair_color=' + hair_color + '&eye_color=' + eye_color + '&food=' + food
 end
 
 get '/drink' do
@@ -82,7 +83,7 @@ post '/drink' do
 	eye_color = params[:eye_color]
 	food = params[:food]
 	drink = params[:drink]
-	redirect 'three_nums2?user_name=' + name + '&age=' + age + '&hair_color=' + hair_color + '&eye_color' + eye_color + '&food=' + food + '&drink=' + drink
+	redirect 'three_nums2?user_name=' + name + '&age=' + age + '&hair_color=' + hair_color + '&eye_color=' + eye_color + '&food=' + food + '&drink=' + drink
 end
 
 get '/three_nums2' do
@@ -105,5 +106,22 @@ post '/three_nums2' do
 	num1 = params[:fav_num1]
 	num2 = params[:fav_num2]
 	num3 = params[:fav_num3]
-	redirect 'results?user_name=' + name + '&age=' + age + '&hair_color=' + hair_color + '&eye_color' + eye_color + '&food=' + food + '&drink=' + drink + '&fav_num1=' + num1 + '&fav_num2=' + num2 + '&fav_num3=' + num3
+	redirect 'results?user_name=' + name + '&age=' + age + '&hair_color=' + hair_color + '&eye_color=' + eye_color + '&food=' + food + '&drink=' + drink + '&fav_num1=' + num1 + '&fav_num2=' + num2 + '&fav_num3=' + num3
+end
+
+get '/results' do
+	age = params[:age]
+	name = params[:user_name]
+	hair_color = params[:hair_color]
+	eye_color = params[:eye_color]
+	food = params[:food]
+	drink = params[:drink]
+	num1 = params[:fav_num1]
+	num2 = params[:fav_num2]
+	num3 = params[:fav_num3]
+	totalnum = add(num1.to_i, num2.to_i, num3.to_i)
+	erb :results, :locals=>{:name => name, :age => age, :hair_color => hair_color, :eye_color => eye_color, :food => food, :drink => drink, :fav_num1 => num1, :fav_num2 => num2, :fav_num3 => num3}
+end
+
+post '/results' do
 end
